@@ -54,7 +54,18 @@
           if (!value) {
             return value;
           }
-          return value.replace(/[^\d]/g, '');
+          var formattedNum, countryCode;
+          var wholeNum = element.intlTelInput("getNumber");
+          if (value.split('')[0] == '0') {
+            formattedNum = value.replace(/[^\d]/g, '').substr(1);
+          }
+          else {
+            formattedNum = value;
+          }
+          countryCode = wholeNum.replace(formattedNum, '');
+          // pricepilot formatting of numbers
+          return countryCode + ' ' + formattedNum;
+          //return value.replace(/[^\d]/g, '');
         });
         ctrl.$parsers.push(function(value) {
           if (value) {
